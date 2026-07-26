@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using ControleGastos.Application.Interfaces;
 using ControleGastos.Application.Services;
 using ControleGastos.Infrastructure;
@@ -15,7 +16,12 @@ builder.Services.AddScoped<ITransacaoRepository, TransacaoRepository>();
 builder.Services.AddScoped<TransacaoService>();
 builder.Services.AddScoped<TotalService>();
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    });
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
