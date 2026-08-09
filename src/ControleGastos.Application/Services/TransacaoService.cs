@@ -60,4 +60,41 @@ public class TransacaoService(ITransacaoRepository transacaoRepository, IPessoaR
 
         return TransacaoDto.FromEntity(transacao);
     }
+    public async Task<List<TransacaoDto>> BuscarPorDescricaoAsync(string termo)
+    {
+        var todas = await transacaoRepository.ListarTodasAsync();
+        var resultado = new List<Transacao>();
+
+        foreach (var t in todas)
+        {
+            if (t.Descricao.Contains(termo, StringComparison.OrdinalIgnoreCase))
+                resultado.Add(t);
+        }
+
+        return resultado.Select(TransacaoDto.FromEntity).ToList();
+    }
+    
+    public async Task<List<TransacaoDto>> OrdenarPorValorAsync(bool ascendente = true)
+    {
+        var lista = (await transacaoRepository.ListarTodasAsync()).ToList();
+        int n = lista.Count;
+
+        //Bubble sort
+        for (int i = 0; i < n - 1; i++)
+        {
+            for (int j = 0; j < n - i - 1; j++)
+            {
+                bool foraDeOrdem = ascendente
+                    ? lista[j].Valor > lista[j + 1].Valor
+                    : lista[j].Valor < lista[j + 1].Valor;
+
+                if (foraDeOrdem)
+                {
+                    (lista[j], lista[j + 1]) = (lista[j + 1], lista[j]);
+                }
+            }
+        }
+
+        return lista.Select(TransacaoDto.FromEntity).ToList();
+    }
 }

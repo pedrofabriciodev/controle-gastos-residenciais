@@ -17,7 +17,7 @@ export function PessoaList({ pessoas, onPessoaRemovida }: Props) {
     }
 
     return (
-        <div className="bg-[#1f2937]/50 border border-gray-700/50 rounded-2xl p-6 shadow-xl min-h-[250px]">
+        <div className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-6 min-h-[250px]">
             <h2 className="text-xl font-semibold mb-6">Pessoas Cadastradas</h2>
             <ul className="space-y-4">
                 {pessoas.map((p) => (

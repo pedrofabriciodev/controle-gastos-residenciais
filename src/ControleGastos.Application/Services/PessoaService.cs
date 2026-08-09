@@ -22,7 +22,7 @@ public class PessoaService(IPessoaRepository repository)
     /// <param name="idade">Idade da pessoa, não pode estar vazio.</param>
     /// <returns>Objeto da pessoa recém-criada, já com o Id gerado pelo banco.</returns>
     /// <exception cref="ArgumentException">Lançada quando o nome está vazio/em branco, ou quando a idade é negativa.</exception>
-    public async Task<Pessoa> CriarAsync(string nome, int idade)
+    public async Task<Pessoa> CriarAsync(string nome, int idade, string? email)
     {
         if (string.IsNullOrWhiteSpace(nome))
             throw new ArgumentException("Nome é obrigatório.");
@@ -30,7 +30,7 @@ public class PessoaService(IPessoaRepository repository)
         if (idade < 0)
             throw new ArgumentException("Idade não pode ser negativa.");
 
-        var pessoa = new Pessoa { Nome = nome, Idade = idade };
+        var pessoa = new Pessoa { Nome = nome, Idade = idade, Email = email };
 
         await repository.AdicionarAsync(pessoa);
         await repository.SalvarAsync();

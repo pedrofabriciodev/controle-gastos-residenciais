@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { apiGet } from "./services/api";
 import type { Pessoa, Transacao, TotalGeral } from "./types";
 import { Header } from "./components/Header";
+import { StatCards } from "./components/StatCards";
 import { PessoaForm } from "./components/PessoaForm";
 import { PessoaList } from "./components/PessoaList";
 import { TransacaoForm } from "./components/TransacaoForm";
@@ -29,9 +30,10 @@ function App() {
     }, []);
 
     return (
-        <div className="min-h-screen p-8 bg-[#141b2d] text-white">
-            <Header />
-            <main className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto px-4">
+        <div className="min-h-screen p-8" style={{ backgroundColor: "var(--bg)" }}>
+            <Header saldoGeral={totais?.saldo ?? null} />
+            {totais && <StatCards totais={totais} />}
+            <main className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-7xl mx-auto px-4">
                 <section className="space-y-8">
                     <PessoaForm onPessoaCriada={() => carregarTudo()} />
                     <TransacaoForm pessoas={pessoas} onTransacaoCriada={() => carregarTudo()} />

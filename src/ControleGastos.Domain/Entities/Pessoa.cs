@@ -20,6 +20,11 @@ public class Pessoa
     /// Idade da pessoa.
     /// </summary>
     public int Idade { get; set; }
+    
+    /// <summary>
+    /// Email da pessoa.
+    /// </summary>
+    public string? Email { get; set; }
 
     /// <summary>
     /// Lista to tipo transacao, com todas as transações realizada por essa pessoa (seja receita ou despesa).

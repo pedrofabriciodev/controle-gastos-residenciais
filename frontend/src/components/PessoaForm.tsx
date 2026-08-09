@@ -25,7 +25,7 @@ export function PessoaForm({ onPessoaCriada }: Props) {
     }
 
     return (
-        <div className="bg-[#1f2937]/50 border border-gray-700/50 rounded-2xl p-6 shadow-xl">
+        <div className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-6">
             <h2 className="text-xl font-semibold mb-6">Cadastrar Pessoa</h2>
             <form className="space-y-4" onSubmit={handleSubmit}>
                 <input

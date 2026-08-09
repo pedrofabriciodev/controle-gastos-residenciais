@@ -36,7 +36,7 @@ export function TransacaoForm({ pessoas, onTransacaoCriada }: Props) {
         "w-full p-3 rounded-lg bg-white text-gray-900 border-none focus:ring-2 focus:ring-blue-500";
 
     return (
-        <div className="bg-[#1f2937]/50 border border-gray-700/50 rounded-2xl p-6 shadow-xl">
+        <div className="bg-[var(--surface)] border border-[var(--border)] rounded-xl p-6">
             <h2 className="text-xl font-semibold mb-6">Cadastrar Transação</h2>
             <form className="space-y-4" onSubmit={handleSubmit}>
                 <select

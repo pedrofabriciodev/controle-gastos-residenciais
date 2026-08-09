@@ -21,6 +21,14 @@ export async function apiPost<T>(path: string, body: unknown): Promise<T> {
     return response.json();
 }
 
+export async function buscarTransacoes(termo: string) {
+    return apiGet<Transacao[]>(`/Transacoes/buscar?termo=${encodeURIComponent(termo)}`);
+}
+
+export async function ordenarTransacoes(ascendente: boolean) {
+    return apiGet<Transacao[]>(`/Transacoes/ordenar?ascendente=${ascendente}`);
+}
+
 export async function apiDelete(path: string): Promise<void> {
     const response = await fetch(`${API_URL}${path}`, { method: "DELETE" });
     if (!response.ok) throw new Error(`Erro ao deletar ${path}`);

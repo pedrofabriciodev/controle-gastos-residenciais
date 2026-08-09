@@ -47,6 +47,18 @@ public class TransacoesController(TransacaoService service) : ControllerBase
             return BadRequest(ex.Message);
         }
     }
+    
+    [HttpGet("buscar")]
+    public async Task<IActionResult> Buscar([FromQuery] string termo)
+    {
+        return Ok(await service.BuscarPorDescricaoAsync(termo));
+    }
+
+    [HttpGet("ordenar")]
+    public async Task<IActionResult> Ordenar([FromQuery] bool ascendente = true)
+    {
+        return Ok(await service.OrdenarPorValorAsync(ascendente));
+    }
 }
 
 /// <summary>

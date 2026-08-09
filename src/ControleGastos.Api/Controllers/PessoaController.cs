@@ -32,7 +32,7 @@ public class PessoasController(PessoaService service) : ControllerBase
     {
         try
         {
-            var pessoa = await service.CriarAsync(request.Nome, request.Idade);
+            var pessoa = await service.CriarAsync(request.Nome, request.Idade, request.Email);
             return CreatedAtAction(nameof(Listar), new { id = pessoa.Id }, pessoa);
         }
         catch (ArgumentException ex)
@@ -64,4 +64,4 @@ public class PessoasController(PessoaService service) : ControllerBase
 /// </summary>
 /// <param name="Nome">Nome da pessoa cadastrada.</param>
 /// <param name="Idade">Idade da pessoa cadastrada</param>
-public record CriarPessoaRequest(string Nome, int Idade);
+public record CriarPessoaRequest(string Nome, int Idade, string? Email);
