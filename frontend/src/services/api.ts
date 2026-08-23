@@ -25,8 +25,8 @@ export async function buscarTransacoes(termo: string) {
     return apiGet<Transacao[]>(`/Transacoes/buscar?termo=${encodeURIComponent(termo)}`);
 }
 
-export async function ordenarTransacoes(ascendente: boolean) {
-    return apiGet<Transacao[]>(`/Transacoes/ordenar?ascendente=${ascendente}`);
+export async function ordenarTransacoes(criterio: string, ascendente: boolean) {
+    return apiGet<Transacao[]>(`/Transacoes/ordenar?criterio=${criterio}&ascendente=${ascendente}`);
 }
 
 export async function apiDelete(path: string): Promise<void> {

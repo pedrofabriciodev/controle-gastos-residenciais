@@ -55,9 +55,9 @@ public class TransacoesController(TransacaoService service) : ControllerBase
     }
 
     [HttpGet("ordenar")]
-    public async Task<IActionResult> Ordenar([FromQuery] bool ascendente = true)
+    public async Task<IActionResult> Ordenar([FromQuery] string criterio = "valor",[FromQuery] bool ascendente = true)
     {
-        return Ok(await service.OrdenarPorValorAsync(ascendente));
+        return Ok(await service.OrdenarAsync(criterio, ascendente));
     }
 }
 

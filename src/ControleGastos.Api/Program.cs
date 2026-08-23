@@ -15,6 +15,7 @@ builder.Services.AddScoped<PessoaService>();
 builder.Services.AddScoped<ITransacaoRepository, TransacaoRepository>();
 builder.Services.AddScoped<TransacaoService>();
 builder.Services.AddScoped<TotalService>();
+builder.Services.AddScoped<EstatisticaService>();
 
 builder.Services.AddControllers()
     .AddJsonOptions(options =>

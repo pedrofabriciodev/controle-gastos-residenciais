@@ -74,19 +74,20 @@ public class TransacaoService(ITransacaoRepository transacaoRepository, IPessoaR
         return resultado.Select(TransacaoDto.FromEntity).ToList();
     }
     
-    public async Task<List<TransacaoDto>> OrdenarPorValorAsync(bool ascendente = true)
+    public async Task<List<TransacaoDto>> OrdenarAsync(string criterio, bool ascendente = true)
     {
         var lista = (await transacaoRepository.ListarTodasAsync()).ToList();
         int n = lista.Count;
 
-        //Bubble sort
         for (int i = 0; i < n - 1; i++)
         {
             for (int j = 0; j < n - i - 1; j++)
             {
-                bool foraDeOrdem = ascendente
-                    ? lista[j].Valor > lista[j + 1].Valor
-                    : lista[j].Valor < lista[j + 1].Valor;
+                int comparacao = criterio.ToLower() == "descricao"
+                    ? string.Compare(lista[j].Descricao, lista[j + 1].Descricao, StringComparison.OrdinalIgnoreCase)
+                    : lista[j].Valor.CompareTo(lista[j + 1].Valor);
+
+                bool foraDeOrdem = ascendente ? comparacao > 0 : comparacao < 0;
 
                 if (foraDeOrdem)
                 {
